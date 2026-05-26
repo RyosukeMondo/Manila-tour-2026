@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0038a8">
+<title>Manila Tour 2026 — 5/25〜28</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🇵🇭%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg-2: #131829;
+    --surface: rgba(255,255,255,0.06);
+    --surface-2: rgba(255,255,255,0.10);
+    --border: rgba(255,255,255,0.08);
+    --text: #ffffff;
+    --muted: #9aa3b8;
+    --accent: #ff3358;
+    --accent-2: #4d8eff;
+    --gold: #ffd23f;
+    --green: #2dd4a4;
+    --radius: 16px;
+    --safe-top: env(safe-area-inset-top);
+    --safe-bottom: env(safe-area-inset-bottom);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    padding-bottom: calc(80px + var(--safe-bottom));
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(77,142,255,0.18), transparent 50%),
+      radial-gradient(circle at 80% 100%, rgba(255,51,88,0.15), transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(255,210,63,0.05), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .container { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 0 16px; }
+
+  /* TOP BAR */
+  .topbar {
+    padding: calc(16px + var(--safe-top)) 16px 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+  }
+  .topbar .brand {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .topbar .brand .flag {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent-2), var(--accent));
+    display: grid; place-items: center; font-size: 16px;
+    box-shadow: 0 4px 12px rgba(77,142,255,0.4);
+  }
+  .topbar .brand .title {
+    font-weight: 700; font-size: 0.95rem; letter-spacing: 0.02em;
+  }
+  .topbar .brand .title .sub {
+    display: block; font-size: 0.7rem; color: var(--muted); font-weight: 500;
+  }
+  .clock {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 6px 12px; border-radius: 999px;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.85rem;
+    backdrop-filter: blur(10px);
+  }
+  .clock .label { color: var(--muted); font-size: 0.7rem; display:block; line-height:1; }
+  .clock .time { font-weight: 700; }
+
+  /* NEXT UP HERO */
+  .hero {
+    margin: 8px 0 24px;
+    padding: 20px;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, rgba(77,142,255,0.20) 0%, rgba(255,51,88,0.20) 100%);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute; top: -50%; right: -20%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+    opacity: 0.10;
+    animation: pulse 6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.10; }
+    50% { transform: scale(1.2); opacity: 0.18; }
+  }
+  .hero .eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .hero .eyebrow .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold);
+    animation: blink 1.5s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .hero h1 {
+    font-size: 1.4rem; line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .hero .when {
+    color: var(--muted); font-size: 0.85rem;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .hero .when .countdown {
+    background: rgba(255,210,63,0.15);
+    color: var(--gold);
+    padding: 2px 10px; border-radius: 999px;
+    font-weight: 700; font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .hero .desc {
+    margin-top: 10px;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.92rem;
+  }
+  .hero .actions {
+    margin-top: 14px;
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 14px; border-radius: 999px;
+    background: rgba(255,255,255,0.10); color: white;
+    border: 1px solid rgba(255,255,255,0.15);
+    font-size: 0.82rem; font-weight: 600;
+    text-decoration: none; cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .btn:hover, .btn:active {
+    background: rgba(255,255,255,0.18);
+    transform: translateY(-1px);
+  }
+  .btn.primary {
+    background: white; color: var(--bg);
+    border-color: transparent;
+  }
+
+  /* DAY TABS */
+  .day-tabs {
+    display: flex; gap: 8px;
+    margin-bottom: 16px;
+    overflow-x: auto;
+    padding: 2px 0 4px;
+    scrollbar-width: none;
+  }
+  .day-tabs::-webkit-scrollbar { display: none; }
+  .day-tab {
+    flex-shrink: 0;
+    padding: 10px 14px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    text-align: center; min-width: 78px;
+    cursor: pointer; transition: all 0.2s ease;
+    text-decoration: none;
+  }
+  .day-tab .num { display: block; font-size: 1.15rem; font-weight: 700; line-height: 1.1; }
+  .day-tab .label { display: block; font-size: 0.65rem; color: var(--muted); margin-top: 2px; letter-spacing: 0.05em; }
+  .day-tab.active {
+    background: white; color: var(--bg); border-color: white;
+  }
+  .day-tab.active .label { color: rgba(0,0,0,0.6); }
+  .day-tab.today {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px rgba(255,210,63,0.15);
+  }
+  .day-tab.today::after {
+    content: "TODAY";
+    display: block;
+    font-size: 0.55rem;
+    color: var(--gold);
+    font-weight: 800;
+    margin-top: 2px;
+    letter-spacing: 0.1em;
+  }
+  .day-tab.active.today::after { color: var(--accent); }
+
+  /* TIMELINE */
+  .day-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .day-header h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--muted);
+  }
+  .day-header h2 strong {
+    color: var(--text);
+    font-size: 1.15rem;
+  }
+  .timeline {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 24px;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 7px; top: 12px; bottom: 12px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--border), transparent);
+  }
+  .event {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+  }
+  .event:hover { background: var(--surface-2); }
+  .event::before {
+    content: "";
+    position: absolute;
+    left: -20px; top: 22px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    z-index: 2;
+  }
+  .event.past { opacity: 0.45; }
+  .event.past::before { background: var(--muted); border-color: var(--muted); }
+  .event.now {
+    background: linear-gradient(135deg, rgba(45,212,164,0.18), rgba(45,212,164,0.06));
+    border-color: var(--green);
+    box-shadow: 0 0 0 4px rgba(45,212,164,0.08), 0 8px 24px rgba(45,212,164,0.15);
+  }
+  .event.now::before {
+    background: var(--green); border-color: var(--green);
+    box-shadow: 0 0 0 4px rgba(45,212,164,0.25);
+    animation: nowpulse 2s ease-in-out infinite;
+  }
+  @keyframes nowpulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(45,212,164,0.25); }
+    50% { box-shadow: 0 0 0 8px rgba(45,212,164,0.10); }
+  }
+  .event.next::before {
+    background: var(--gold); border-color: var(--gold);
+  }
+  .event-row {
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .event-time {
+    flex-shrink: 0;
+    width: 60px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+  }
+  .event.past .event-time { color: var(--muted); }
+  .event.now .event-time { color: var(--green); }
+  .event-body { flex: 1; min-width: 0; }
+  .event-title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 4px;
+    line-height: 1.35;
+  }
+  .event-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .event-status {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 0.7rem; font-weight: 700;
+    padding: 2px 8px; border-radius: 999px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .event.now .event-status {
+    background: var(--green); color: var(--bg);
+  }
+  .event.next .event-status {
+    background: var(--gold); color: var(--bg);
+  }
+  .event-tags {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;
+  }
+  .tag {
+    font-size: 0.68rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.08);
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .tag.finance { background: rgba(45,212,164,0.18); color: var(--green); }
+  .tag.casino { background: rgba(168,85,247,0.20); color: #c084fc; }
+  .tag.realestate { background: rgba(255,210,63,0.18); color: var(--gold); }
+  .tag.flight { background: rgba(77,142,255,0.18); color: var(--accent-2); }
+  .tag.food { background: rgba(255,51,88,0.15); color: #ff7a90; }
+  .tag.culture { background: rgba(168,85,247,0.18); color: #c084fc; }
+  .event-links {
+    margin-top: 8px;
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .event-link {
+    font-size: 0.75rem;
+    color: var(--accent-2);
+    text-decoration: none;
+    background: rgba(77,142,255,0.12);
+    padding: 4px 10px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+  }
+  .event-link:hover {
+    background: rgba(77,142,255,0.22);
+  }
+
+  /* PANELS (info, members, hotel) */
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 12px;
+    backdrop-filter: blur(10px);
+  }
+  .panel h3 {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    color: var(--muted);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+  }
+  .member {
+    background: rgba(255,255,255,0.04);
+    padding: 10px 12px;
+    border-radius: 10px;
+    border-left: 3px solid var(--accent-2);
+  }
+  .member .name { font-weight: 700; font-size: 0.9rem; }
+  .member .reading { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+  .flight-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .flight-row:last-child { border-bottom: none; }
+  .flight-row .from, .flight-row .to {
+    flex: 1;
+  }
+  .flight-row .code {
+    font-weight: 800; font-size: 1.05rem; color: var(--text);
+  }
+  .flight-row .time {
+    font-size: 0.78rem; color: var(--muted); margin-top: 2px;
+  }
+  .flight-row .arrow {
+    color: var(--accent-2); font-size: 1.2rem;
+  }
+  .flight-row .meta {
+    width: 100%; flex-basis: 100%;
+    font-size: 0.75rem; color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* BOTTOM NAV */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(10,14,26,0.85);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border);
+    padding: 8px 0 calc(8px + var(--safe-bottom));
+    z-index: 50;
+  }
+  .bottom-nav-inner {
+    max-width: 720px; margin: 0 auto;
+    display: flex; justify-content: space-around;
+  }
+  .nav-item {
+    flex: 1;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 4px; padding: 6px;
+    background: transparent; border: none;
+    color: var(--muted);
+    font-size: 0.65rem; font-weight: 600;
+    cursor: pointer;
+    transition: color 0.15s ease;
+  }
+  .nav-item .icon {
+    font-size: 1.3rem;
+    line-height: 1;
+  }
+  .nav-item.active {
+    color: var(--text);
+  }
+  .nav-item.active .icon {
+    filter: drop-shadow(0 0 8px rgba(255,210,63,0.5));
+  }
+
+  /* VIEWS */
+  .view { display: none; }
+  .view.active { display: block; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .empty {
+    text-align: center; padding: 32px 16px;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 600px) {
+    .hero h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="flag">🇵🇭</div>
+      <div class="title">
+        Manila Tour 2026
+        <span class="sub">5/25 — 5/28 福岡チーム</span>
+      </div>
+    </div>
+    <div class="clock">
+      <span class="label">Manila</span>
+      <span class="time" id="clock-time">--:--</span>
+    </div>
+  </header>
+
+  <!-- VIEW: NOW -->
+  <div class="view active" id="view-now">
+    <div class="hero" id="next-hero">
+      <!-- populated by JS -->
+    </div>
+
+    <div class="day-tabs" id="day-tabs">
+      <!-- populated by JS -->
+    </div>
+
+    <div class="day-header">
+      <h2 id="day-header-text">予定</h2>
+    </div>
+
+    <div class="timeline" id="timeline">
+      <!-- populated by JS -->
+    </div>
+  </div>
+
+  <!-- VIEW: INFO -->
+  <div class="view" id="view-info">
+    <div class="panel">
+      <h3>✈️ フライト</h3>
+      <div class="flight-row">
+        <div class="from">
+          <div class="code">FUK</div>
+          <div class="time">5/25 月 20:00</div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="to">
+          <div class="code">MNL T3</div>
+          <div class="time">5/25 月 23:10</div>
+        </div>
+        <div class="meta">セブパシフィック航空 5J 923 (往路)</div>
+      </div>
+      <div class="flight-row">
+        <div class="from">
+          <div class="code">MNL T3</div>
+          <div class="time">5/28 木 14:05</div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="to">
+          <div class="code">FUK</div>
+          <div class="time">5/28 木 19:00</div>
+        </div>
+        <div class="meta">セブパシフィック航空 5J 922 (復路)</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>🏨 ホテル</h3>
+      <div style="font-weight:700; font-size:1.05rem;">ダイヤモンドレジデンス マカティ</div>
+      <div style="color:var(--muted); font-size:0.85rem; margin-top:4px;">マカティ地区 / 3泊</div>
+      <div class="event-links" style="margin-top:12px;">
+        <a class="event-link" href="https://maps.google.com/?q=Diamond+Residences+Makati" target="_blank" rel="noopener">📍 Maps で開く</a>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>🎯 ツアーコンセプト</h3>
+      <div style="font-size:0.9rem; line-height:1.7;">
+        現地の優良企業との商談、有益な情報、企業、場所、グルメを楽しむ<strong>完全オーダーメイド型</strong>視察ツアー
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: MEMBERS -->
+  <div class="view" id="view-members">
+    <div class="panel">
+      <h3>👥 参加者 (福岡チーム 8名)</h3>
+      <div class="members-grid">
+        <div class="member"><div class="name">橋爪 佑典</div><div class="reading">はしづめ ゆうすけ</div></div>
+        <div class="member"><div class="name">門戸 良介</div><div class="reading">もんど りょうすけ</div></div>
+        <div class="member"><div class="name">栄木 志穂</div><div class="reading">えいき しほ</div></div>
+        <div class="member"><div class="name">山口 隆司</div><div class="reading">やまぐち りゅうじ</div></div>
+        <div class="member"><div class="name">長田 真帆</div><div class="reading">ながた まほ</div></div>
+        <div class="member"><div class="name">高野 晃弘</div><div class="reading">たかの あきひろ</div></div>
+        <div class="member"><div class="name">木下 綾子</div><div class="reading">きのした あやこ</div></div>
+        <div class="member"><div class="name">木下 山多</div><div class="reading">きのした さんた</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<nav class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <button class="nav-item active" data-view="now">
+      <span class="icon">⏱</span>
+      <span>NOW</span>
+    </button>
+    <button class="nav-item" data-view="info">
+      <span class="icon">✈️</span>
+      <span>INFO</span>
+    </button>
+    <button class="nav-item" data-view="members">
+      <span class="icon">👥</span>
+      <span>TEAM</span>
+    </button>
+  </div>
+</nav>
+
+<script>
+  // ============================================
+  // SCHEDULE DATA (Manila time, UTC+8)
+  // ============================================
+  const TOUR = [
+    {
+      date: '2026-05-25', label: '出発', short: 'MON',
+      events: [
+        { time:'20:00', title:'福岡空港 (FUK) 出発', desc:'セブパシフィック航空 5J 923', tags:['flight'] },
+        { time:'23:10', title:'マニラ空港 (MNL T3) 着', desc:'入国手続き', tags:['flight'] },
+        { time:'23:50', title:'空港ピックアップ', desc:'専用車にてホテルへ' },
+        { time:'24:30', title:'ホテルチェックイン', desc:'ダイヤモンドレジデンス マカティ',
+          links:[{label:'📍 Maps', url:'https://maps.google.com/?q=Diamond+Residences+Makati'}] },
+      ]
+    },
+    {
+      date: '2026-05-26', label: '投資・カジノ', short: 'TUE',
+      events: [
+        { time:'09:00', title:'ホテルピックアップ', desc:'' },
+        { time:'10:00', title:'インスパイヤーホールディングス 訪問',
+          desc:'10兆円財閥の関連企業 (金融・商材・卸・カジノ・都市開発) にて投資信託などの話を伺う',
+          tags:['finance','casino','realestate'],
+          links:[
+            {label:'allianceglobalinc.com', url:'https://www.allianceglobalinc.com/'},
+            {label:'inspirenextglobal.com', url:'https://inspirenextglobal.com/'},
+            {label:'inspireholdings.ph', url:'https://www.inspireholdings.ph/'},
+          ] },
+        { time:'12:30', title:'ランチ', desc:'', tags:['food'] },
+        { time:'14:00', title:'グローバルシティー視察', desc:'BGC (ボニファシオ・グローバル・シティ)',
+          links:[{label:'📍 Maps', url:'https://maps.google.com/?q=Bonifacio+Global+City'}] },
+        { time:'16:00', title:'カジノエリア視察', desc:'', tags:['casino'] },
+        { time:'19:00', title:'夕食：ダンパ', desc:'シーフード市場で新鮮な魚介を堪能', tags:['food'],
+          links:[{label:'📍 Maps', url:'https://maps.google.com/?q=Dampa+Seafood+Manila'}] },
+      ]
+    },
+    {
+      date: '2026-05-27', label: '不動産・開発', short: 'WED',
+      events: [
+        { time:'09:00', title:'ホテルピックアップ', desc:'' },
+        { time:'10:00', title:'シャングリラ系 SUMMIT 視察', desc:'', tags:['realestate'] },
+        { time:'10:40', title:'PH1 World「Myenso」視察', desc:'ケソン横丁予定地', tags:['realestate'],
+          links:[{label:'ph1worlddevelopers.com', url:'https://ph1worlddevelopers.com/'}] },
+        { time:'12:30', title:'ランチ', desc:'', tags:['food'] },
+        { time:'13:00', title:'LYKEE KONDO 視察', desc:'' },
+        { time:'15:00', title:'Weecommunication 視察', desc:'' },
+        { time:'18:00', title:'Makati「RISE」アメニティ視察', desc:'', tags:['realestate'] },
+        { time:'19:00', title:'グリーンベルトモール視察 / 夕食', desc:'夕食時に貿易港エリアを開発する大企業をご紹介', tags:['food','realestate'],
+          links:[
+            {label:'pontefinoestates.com', url:'https://pontefinoestates.com/'},
+            {label:'📍 Maps', url:'https://maps.google.com/?q=Greenbelt+Mall+Makati'},
+          ] },
+        { time:'22:00', title:'SPA など', desc:'フリータイム' },
+      ]
+    },
+    {
+      date: '2026-05-28', label: '世界遺産・帰国', short: 'THU',
+      events: [
+        { time:'09:00', title:'ホテルピックアップ', desc:'' },
+        { time:'10:00', title:'世界遺産の教会・スペインの街並み視察', desc:'イントラムロス (旧市街) エリア', tags:['culture'],
+          links:[{label:'📍 Maps', url:'https://maps.google.com/?q=Intramuros+Manila'}] },
+        { time:'12:00', title:'空港へ移動', desc:'' },
+        { time:'14:05', title:'マニラ空港 (MNL T3) 発', desc:'セブパシフィック航空 5J 922', tags:['flight'] },
+        { time:'19:00', title:'福岡空港 (FUK) 着', desc:'お疲れ様でした', tags:['flight'] },
+      ]
+    },
+  ];
+
+  // ============================================
+  // TIME UTILITIES (Manila = UTC+8)
+  // ============================================
+  function nowInManila() {
+    const now = new Date();
+    const utcMs = now.getTime() + now.getTimezoneOffset() * 60000;
+    return new Date(utcMs + 8 * 3600000);
+  }
+  function eventDateTime(dateStr, timeStr) {
+    // Treat HH:MM >= 24 as next-day rollover (e.g., 24:30 = next day 00:30)
+    const [Y, M, D] = dateStr.split('-').map(Number);
+    let [hh, mm] = timeStr.split(':').map(Number);
+    let dayOffset = 0;
+    if (hh >= 24) { dayOffset = Math.floor(hh / 24); hh = hh % 24; }
+    const d = new Date(Date.UTC(Y, M - 1, D + dayOffset, hh, mm));
+    // d represents Manila wall-clock; subtract 8h to get true UTC
+    return new Date(d.getTime() - 8 * 3600000);
+  }
+  function formatCountdown(ms) {
+    if (ms <= 0) return '進行中';
+    const totalMin = Math.floor(ms / 60000);
+    const days = Math.floor(totalMin / 1440);
+    const hours = Math.floor((totalMin % 1440) / 60);
+    const min = totalMin % 60;
+    if (days > 0) return `${days}日 ${hours}時間後`;
+    if (hours > 0) return `${hours}時間 ${min}分後`;
+    return `${min}分後`;
+  }
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  // ============================================
+  // BUILD ALL EVENTS WITH ABSOLUTE DATETIME
+  // ============================================
+  const ALL_EVENTS = [];
+  TOUR.forEach((day, di) => {
+    day.events.forEach((ev, ei) => {
+      ALL_EVENTS.push({
+        ...ev,
+        dayIndex: di,
+        eventIndex: ei,
+        date: day.date,
+        dt: eventDateTime(day.date, ev.time),
+      });
+    });
+  });
+  // Sort by datetime (in case order differs)
+  ALL_EVENTS.sort((a, b) => a.dt - b.dt);
+
+  // ============================================
+  // FIND CURRENT / NEXT EVENT
+  // ============================================
+  function findNextEvent(now) {
+    return ALL_EVENTS.find(e => e.dt > now);
+  }
+  function findCurrentEvent(now) {
+    // "Current" = event whose start <= now < next event's start, within a 90min window
+    let current = null;
+    for (let i = 0; i < ALL_EVENTS.length; i++) {
+      const e = ALL_EVENTS[i];
+      const next = ALL_EVENTS[i + 1];
+      if (e.dt <= now && (!next || next.dt > now)) {
+        const windowEnd = next ? next.dt : new Date(e.dt.getTime() + 90 * 60000);
+        if (now < windowEnd) current = e;
+        break;
+      }
+    }
+    return current;
+  }
+  function todayIndex(now) {
+    const ymd = `${now.getUTCFullYear()}-${pad(now.getUTCMonth()+1)}-${pad(now.getUTCDate())}`;
+    const i = TOUR.findIndex(d => d.date === ymd);
+    if (i >= 0) return i;
+    // Before tour
+    if (now < eventDateTime(TOUR[0].date, '00:00')) return 0;
+    // After tour
+    return TOUR.length - 1;
+  }
+
+  // ============================================
+  // RENDERING
+  // ============================================
+  let selectedDay = 0;
+  let userSelectedDay = false;
+
+  function renderClock() {
+    const now = nowInManila();
+    document.getElementById('clock-time').textContent =
+      `${pad(now.getUTCHours())}:${pad(now.getUTCMinutes())}`;
+  }
+
+  function renderHero() {
+    const now = nowInManila();
+    const current = findCurrentEvent(now);
+    const next = findNextEvent(now);
+    const hero = document.getElementById('next-hero');
+
+    let target = current || next;
+    if (!target) {
+      hero.innerHTML = `<div class="eyebrow"><span class="dot"></span>ツアー終了</div>
+        <h1>お疲れ様でした 🎉</h1>
+        <div class="desc">福岡へ無事帰国。次回もお楽しみに。</div>`;
+      return;
+    }
+
+    const isNow = current && target === current;
+    const eyebrow = isNow ? 'NOW · 進行中' : 'NEXT UP · 次の予定';
+    const countdownMs = target.dt - now;
+    const countdown = isNow ? '進行中' : formatCountdown(countdownMs);
+    const dayLabel = TOUR[target.dayIndex].date.slice(5).replace('-', '/');
+
+    const linksHTML = (target.links || []).map(l =>
+      `<a class="btn" href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`
+    ).join('');
+
+    hero.innerHTML = `
+      <div class="eyebrow"><span class="dot"></span>${eyebrow}</div>
+      <h1>${target.title}</h1>
+      <div class="when">
+        <span>${dayLabel} ${target.time}</span>
+        <span class="countdown">${countdown}</span>
+      </div>
+      ${target.desc ? `<div class="desc">${target.desc}</div>` : ''}
+      ${linksHTML ? `<div class="actions">${linksHTML}</div>` : ''}
+    `;
+  }
+
+  function renderDayTabs() {
+    const now = nowInManila();
+    const todayI = todayIndex(now);
+    const tabs = document.getElementById('day-tabs');
+    tabs.innerHTML = TOUR.map((d, i) => {
+      const [Y, M, D] = d.date.split('-');
+      const isToday = i === todayI;
+      const isActive = i === selectedDay;
+      return `<a class="day-tab ${isActive?'active':''} ${isToday?'today':''}" data-day="${i}">
+        <span class="num">${parseInt(M)}/${parseInt(D)}</span>
+        <span class="label">${d.short} · ${d.label}</span>
+      </a>`;
+    }).join('');
+    tabs.querySelectorAll('.day-tab').forEach(el => {
+      el.addEventListener('click', () => {
+        selectedDay = parseInt(el.dataset.day);
+        userSelectedDay = true;
+        renderDayTabs();
+        renderTimeline();
+        renderDayHeader();
+      });
+    });
+  }
+
+  function renderDayHeader() {
+    const d = TOUR[selectedDay];
+    const [Y, M, D] = d.date.split('-');
+    const weekdayJP = ['日','月','火','水','木','金','土'];
+    const dateObj = new Date(Date.UTC(parseInt(Y), parseInt(M)-1, parseInt(D)));
+    const wd = weekdayJP[dateObj.getUTCDay()];
+    document.getElementById('day-header-text').innerHTML =
+      `<strong>${parseInt(M)}月${parseInt(D)}日(${wd})</strong> · ${d.label}`;
+  }
+
+  function renderTimeline() {
+    const now = nowInManila();
+    const next = findNextEvent(now);
+    const current = findCurrentEvent(now);
+    const day = TOUR[selectedDay];
+    const tl = document.getElementById('timeline');
+
+    tl.innerHTML = day.events.map((ev, ei) => {
+      const dt = eventDateTime(day.date, ev.time);
+      const isPast = dt < now && (!current || !(current.dayIndex === selectedDay && current.eventIndex === ei));
+      const isNow = current && current.dayIndex === selectedDay && current.eventIndex === ei;
+      const isNext = next && next.dayIndex === selectedDay && next.eventIndex === ei && !isNow;
+
+      const cls = ['event'];
+      if (isPast) cls.push('past');
+      if (isNow) cls.push('now');
+      if (isNext) cls.push('next');
+
+      const status = isNow ? '<div class="event-status">● NOW</div>' :
+                     isNext ? '<div class="event-status">▶ NEXT</div>' : '';
+      const tagsHTML = (ev.tags || []).map(t => `<span class="tag ${t}">${t}</span>`).join('');
+      const linksHTML = (ev.links || []).map(l =>
+        `<a class="event-link" href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`
+      ).join('');
+
+      return `<div class="${cls.join(' ')}">
+        <div class="event-row">
+          <div class="event-time">${ev.time.replace(/^24:/, '00:')}</div>
+          <div class="event-body">
+            ${status}
+            <div class="event-title">${ev.title}</div>
+            ${ev.desc ? `<div class="event-desc">${ev.desc}</div>` : ''}
+            ${tagsHTML ? `<div class="event-tags">${tagsHTML}</div>` : ''}
+            ${linksHTML ? `<div class="event-links">${linksHTML}</div>` : ''}
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function autoSelectTodayIfNeeded() {
+    if (!userSelectedDay) {
+      const now = nowInManila();
+      selectedDay = todayIndex(now);
+    }
+  }
+
+  function refresh() {
+    autoSelectTodayIfNeeded();
+    renderClock();
+    renderHero();
+    renderDayTabs();
+    renderDayHeader();
+    renderTimeline();
+  }
+
+  // ============================================
+  // VIEW SWITCHING
+  // ============================================
+  document.querySelectorAll('.nav-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.dataset.view;
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+      document.getElementById('view-' + view).classList.add('active');
+      btn.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // ============================================
+  // INIT + LIVE UPDATES
+  // ============================================
+  refresh();
+  setInterval(() => {
+    renderClock();
+    renderHero();
+  }, 30000);
+  setInterval(() => {
+    if (!userSelectedDay) refresh();
+  }, 5 * 60000);
+
+  // Refresh when tab becomes visible
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) refresh();
+  });
+</script>
+
+</body>
+</html>
