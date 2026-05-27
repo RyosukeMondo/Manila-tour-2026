@@ -636,12 +636,14 @@
 
   // ============================================
   // TIME UTILITIES (Manila = UTC+8)
+  // Two distinct concepts:
+  //   - "epoch" Date: true moment in time, used for comparisons.
+  //   - "Manila wall" Date: a Date whose UTC-getters return Manila wall-clock
+  //     fields (Y/M/D/H/M). Used only for display/date-bucketing.
   // ============================================
-  function nowInManila() {
-    const now = new Date();
-    const utcMs = now.getTime() + now.getTimezoneOffset() * 60000;
-    return new Date(utcMs + 8 * 3600000);
-  }
+  const MANILA_OFFSET_MS = 8 * 3600000;
+  function nowEpoch() { return new Date(); }
+  function nowManilaWall() { return new Date(Date.now() + MANILA_OFFSET_MS); }
   function eventDateTime(dateStr, timeStr) {
     // Treat HH:MM >= 24 as next-day rollover (e.g., 24:30 = next day 00:30)
     const [Y, M, D] = dateStr.split('-').map(Number);
@@ -649,8 +651,8 @@
     let dayOffset = 0;
     if (hh >= 24) { dayOffset = Math.floor(hh / 24); hh = hh % 24; }
     const d = new Date(Date.UTC(Y, M - 1, D + dayOffset, hh, mm));
-    // d represents Manila wall-clock; subtract 8h to get true UTC
-    return new Date(d.getTime() - 8 * 3600000);
+    // d represents Manila wall-clock as if UTC; subtract 8h to get true epoch
+    return new Date(d.getTime() - MANILA_OFFSET_MS);
   }
   function formatCountdown(ms) {
     if (ms <= 0) return '進行中';
@@ -702,13 +704,13 @@
     }
     return current;
   }
-  function todayIndex(now) {
-    const ymd = `${now.getUTCFullYear()}-${pad(now.getUTCMonth()+1)}-${pad(now.getUTCDate())}`;
+  function todayIndex() {
+    const wall = nowManilaWall();
+    const ymd = `${wall.getUTCFullYear()}-${pad(wall.getUTCMonth()+1)}-${pad(wall.getUTCDate())}`;
     const i = TOUR.findIndex(d => d.date === ymd);
     if (i >= 0) return i;
-    // Before tour
+    const now = nowEpoch();
     if (now < eventDateTime(TOUR[0].date, '00:00')) return 0;
-    // After tour
     return TOUR.length - 1;
   }
 
@@ -719,13 +721,13 @@
   let userSelectedDay = false;
 
   function renderClock() {
-    const now = nowInManila();
+    const wall = nowManilaWall();
     document.getElementById('clock-time').textContent =
-      `${pad(now.getUTCHours())}:${pad(now.getUTCMinutes())}`;
+      `${pad(wall.getUTCHours())}:${pad(wall.getUTCMinutes())}`;
   }
 
   function renderHero() {
-    const now = nowInManila();
+    const now = nowEpoch();
     const current = findCurrentEvent(now);
     const next = findNextEvent(now);
     const hero = document.getElementById('next-hero');
@@ -761,8 +763,7 @@
   }
 
   function renderDayTabs() {
-    const now = nowInManila();
-    const todayI = todayIndex(now);
+    const todayI = todayIndex();
     const tabs = document.getElementById('day-tabs');
     tabs.innerHTML = TOUR.map((d, i) => {
       const [Y, M, D] = d.date.split('-');
@@ -795,7 +796,7 @@
   }
 
   function renderTimeline() {
-    const now = nowInManila();
+    const now = nowEpoch();
     const next = findNextEvent(now);
     const current = findCurrentEvent(now);
     const day = TOUR[selectedDay];
@@ -836,8 +837,7 @@
 
   function autoSelectTodayIfNeeded() {
     if (!userSelectedDay) {
-      const now = nowInManila();
-      selectedDay = todayIndex(now);
+      selectedDay = todayIndex();
     }
   }
 
